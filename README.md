@@ -1,7 +1,7 @@
 # BasicBERT
 
 **A From-Scratch Implementation of BERT (Encoder-only Transformer)**  
-English + Urdu Support | Built for Learning & Portfolio
+English + Urdu Support
 
 ---
 
@@ -26,8 +26,10 @@ This project aims to create a **basic but complete version of BERT** using only 
 - Clean Transformer Encoder (Multi-Head Attention + Position-wise FFN + Add & Norm)
 - Sinusoidal Positional Encoding
 - Hugging Face `tokenizers` (BPE)
+- Masked Language Modeling Head
+- Classification Head
 - Industrial project structure
-- Config-driven design
+- Config-driven design (coming soon)
 - FastAPI inference (planned)
 - English + Urdu support
 
