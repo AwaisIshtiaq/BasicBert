@@ -1,0 +1,50 @@
+# ======================
+# BasicBERT - Pretraining Config (MLM)
+# ======================
+
+# Inherit from base and override only what is needed
+
+model:
+  vocab_size: 30000
+  d_model: 512
+  num_heads: 8
+  num_layers: 6
+  d_ff: 2048
+  max_len: 512
+  dropout: 0.1
+
+training:
+  batch_size: 16
+  learning_rate: 5e-5
+  weight_decay: 0.01
+  epochs: 5
+  gradient_accumulation_steps: 2
+  max_grad_norm: 1.0
+  seed: 42
+  task: "mlm"                    # Masked Language Modeling
+
+data:
+  max_length: 128
+  mlm_probability: 0.15
+  train_file: "data/processed/train.txt"
+  val_file: "data/processed/val.txt"
+
+optimizer:
+  name: "AdamW"
+  betas: [0.9, 0.999]
+  eps: 1e-8
+
+scheduler:
+  name: "linear"
+  warmup_ratio: 0.1
+
+logging:
+  log_every: 50
+  eval_every: 500
+  save_every: 1000
+  project_name: "basicbert-pretrain"
+
+paths:
+  output_dir: "checkpoints/pretrain"
+  log_dir: "logs/pretrain"
+  tokenizer_path: "data/processed/tokenizer.json"
