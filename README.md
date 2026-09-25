@@ -1,7 +1,7 @@
 # BasicBERT
 
 **A From-Scratch Implementation of BERT (Encoder-only Transformer)**  
-English + Urdu Support
+English + Urdu Support 
 
 ---
 
@@ -28,9 +28,11 @@ This project aims to create a **basic but complete version of BERT** using only 
 - Hugging Face `tokenizers` (BPE)
 - Masked Language Modeling Head
 - Classification Head
+- Full training pipeline (optimizer, scheduler, trainer)
+- Inference / Predictor class
 - Industrial project structure
-- Config-driven design (coming soon)
-- FastAPI inference (planned)
+- Config-driven design
+- FastAPI inference (coming next)
 - English + Urdu support
 
 ---
