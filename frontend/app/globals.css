@@ -1,0 +1,181 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  :root {
+    --background: 0 0% 98%;
+    --foreground: 240 10% 4%;
+    --surface: 0 0% 100%;
+    --surface-2: 240 6% 96%;
+    --border: 240 6% 90%;
+    --muted: 240 5% 96%;
+    --muted-foreground: 240 5% 38%;
+    --accent: 142 72% 29%;
+    --accent-fg: 0 0% 100%;
+    --accent-soft: 142 72% 29%;
+    --brand: 262 83% 48%;
+    --brand-soft: 262 83% 48%;
+    --positive: 142 72% 29%;
+    --negative: 0 79% 46%;
+    --grid-color: 240 6% 92%;
+    --ring: 142 69% 38%;
+  }
+
+  .dark {
+    --background: 240 10% 4%;
+    --foreground: 0 0% 98%;
+    --surface: 240 8% 7%;
+    --surface-2: 240 7% 10%;
+    --border: 240 6% 16%;
+    --muted: 240 6% 11%;
+    --muted-foreground: 240 5% 64%;
+    --accent: 142 71% 45%;
+    --accent-fg: 140 80% 5%;
+    --accent-soft: 142 71% 45%;
+    --brand: 262 83% 71%;
+    --brand-soft: 262 83% 71%;
+    --positive: 142 71% 45%;
+    --negative: 0 84% 65%;
+    --grid-color: 240 6% 14%;
+    --ring: 142 71% 45%;
+  }
+
+  * {
+    @apply border-border;
+  }
+
+  html {
+    scroll-behavior: smooth;
+    -webkit-text-size-adjust: 100%;
+  }
+
+  body {
+    @apply bg-background text-foreground antialiased;
+    font-feature-settings: "cv02", "cv03", "cv04", "cv11";
+    text-rendering: optimizeLegibility;
+  }
+
+  ::selection {
+    background: hsl(var(--accent) / 0.3);
+  }
+
+  :focus-visible {
+    outline: 2px solid hsl(var(--ring));
+    outline-offset: 2px;
+    border-radius: 4px;
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    html {
+      scroll-behavior: auto;
+    }
+    *,
+    *::before,
+    *::after {
+      animation-duration: 0.001ms !important;
+      animation-iteration-count: 1 !important;
+      transition-duration: 0.001ms !important;
+    }
+  }
+}
+
+@layer components {
+  /* Subtle blueprint grid used behind hero + playgrounds */
+  .bg-grid {
+    background-image:
+      linear-gradient(
+        to right,
+        hsl(var(--grid-color) / 0.6) 1px,
+        transparent 1px
+      ),
+      linear-gradient(
+        to bottom,
+        hsl(var(--grid-color) / 0.6) 1px,
+        transparent 1px
+      );
+    background-size: 56px 56px;
+    mask-image: radial-gradient(
+      ellipse 80% 60% at 50% 0%,
+      black 35%,
+      transparent 75%
+    );
+  }
+
+  .card-surface {
+    @apply rounded-2xl border bg-surface shadow-soft;
+  }
+
+  .chip {
+    @apply inline-flex items-center gap-2 rounded-full border bg-surface/80 px-3 py-1 text-xs font-medium text-muted-foreground backdrop-blur;
+  }
+
+  .btn {
+    @apply inline-flex cursor-pointer items-center justify-center gap-2 rounded-xl px-4 py-2.5 text-sm font-medium transition-all duration-200 disabled:cursor-not-allowed disabled:opacity-55;
+  }
+
+  .btn-primary {
+    @apply btn bg-accent text-accent-fg shadow-[0_10px_30px_-12px_hsl(var(--accent)/0.7)] hover:brightness-95 active:scale-[0.98];
+  }
+
+  .dark .btn-primary {
+    @apply hover:brightness-110;
+  }
+
+  .btn-secondary {
+    @apply btn border bg-surface text-foreground hover:border-foreground/25 hover:bg-surface-2 active:scale-[0.98];
+  }
+
+  .btn-ghost {
+    @apply btn text-muted-foreground hover:bg-surface-2 hover:text-foreground;
+  }
+
+  .field {
+    @apply w-full resize-none rounded-2xl border bg-background px-4 py-3.5 text-[15px] leading-relaxed text-foreground placeholder:text-muted-foreground/70 shadow-soft transition-all duration-200 focus:border-accent/60 focus:outline-none focus:ring-4 focus:ring-accent/15;
+  }
+
+  .skeleton {
+    @apply relative overflow-hidden rounded-xl bg-surface-2;
+  }
+
+  .skeleton::after {
+    content: "";
+    @apply absolute inset-y-0 w-full animate-shimmer bg-gradient-to-r from-transparent via-foreground/[0.06] to-transparent;
+  }
+}
+
+@layer utilities {
+  .text-gradient {
+    background: linear-gradient(
+      100deg,
+      hsl(var(--foreground)) 20%,
+      hsl(var(--accent)) 55%,
+      hsl(var(--brand)) 90%
+    );
+    -webkit-background-clip: text;
+    background-clip: text;
+    color: transparent;
+  }
+
+  .text-balance {
+    text-wrap: balance;
+  }
+
+  .font-urdu {
+    font-family: var(--font-urdu), var(--font-sans);
+    line-height: 2.1;
+    direction: rtl;
+  }
+
+  .scrollbar-thin::-webkit-scrollbar {
+    width: 8px;
+    height: 8px;
+  }
+  .scrollbar-thin::-webkit-scrollbar-thumb {
+    background: hsl(var(--border));
+    border-radius: 999px;
+  }
+  .scrollbar-thin::-webkit-scrollbar-track {
+    background: transparent;
+  }
+}
